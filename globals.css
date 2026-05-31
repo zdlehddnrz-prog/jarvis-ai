@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #060b14;
+  color: #c8e8f8;
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+:root {
+  --j: #00d4ff;
+  --jd: #0a0e1a;
+  --jb: rgba(0,212,255,0.25);
+  --jt: #8ab8cc;
+  --jdim: #3a6a84;
+  --red: #ff4466;
+  --grn: #00ffaa;
+  --amb: #ffaa00;
+}
+
+.orbitron { font-family: 'Orbitron', monospace; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,212,255,0.3); border-radius: 2px; }
+
+.panel {
+  background: rgba(8,16,32,0.92);
+  border: 1px solid var(--jb);
+  border-radius: 3px;
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+}
+
+.scanline {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.4), transparent);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 1000;
+}
+@keyframes scan {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100vh; opacity: 0; }
+}
+
+.pulse-core {
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 15px #00d4ff, 0 0 30px rgba(0,212,255,.4); }
+  50% { box-shadow: 0 0 25px #00d4ff, 0 0 50px rgba(0,212,255,.6); }
+}
+
+.spin-slow { animation: rspin 10s linear infinite; }
+.spin-mid { animation: rspin 6s linear infinite reverse; }
+@keyframes rspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+.blink { animation: blink 2s infinite; }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+.msg-in { animation: msgIn .25s ease; }
+@keyframes msgIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+.mic-active {
+  background: rgba(255,40,80,.2) !important;
+  border-color: var(--red) !important;
+  color: var(--red) !important;
+  animation: recpulse 1s ease-in-out infinite;
+}
+@keyframes recpulse {
+  0%,100% { box-shadow: 0 0 4px rgba(255,40,80,.3); }
+  50% { box-shadow: 0 0 12px rgba(255,40,80,.6); }
+}
